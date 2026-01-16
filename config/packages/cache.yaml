@@ -1,5 +1,13 @@
 framework:
     cache:
+        app: cache.adapter.filesystem
+        default_redis_provider: redis://localhost
+        
+        pools:
+            cache.poi:
+                adapter: cache.adapter.filesystem
+                default_lifetime: 3600 # 1 heure
+    
         # Unique name of your app: used to compute stable namespaces for cache keys.
         #prefix_seed: your_vendor_name/app_name
 

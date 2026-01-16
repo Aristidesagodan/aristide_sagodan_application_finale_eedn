@@ -1,0 +1,175 @@
+/* =========================================================
+   THEMES
+========================================================= */
+body.light-mode {
+    background: #f4f6f8;
+    color: #222;
+}
+
+body.dark-mode {
+    background: #1e1e1e;
+    color: #eee;
+}
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+/* =========================================================
+   HEADER / NAV
+========================================================= */
+header {
+    background: #ffffff;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.dark-mode header {
+    background: #2a2a2a;
+    border-bottom: 1px solid #444;
+}
+
+nav a {
+    margin-right: 15px;
+    color: #007bff;
+    text-decoration: none; /* PAS de soulignement */
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline; /* souligné uniquement au survol */
+}
+
+button {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #007bff;
+    color: #fff;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* =========================================================
+   TITRES
+========================================================= */
+h1 {
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+body.dark-mode h2 {
+    color: #66aaff;
+}
+
+/* =========================================================
+   LISTES DASHBOARD
+========================================================= */
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul li {
+    background: #ffffff;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.dark-mode ul li {
+    background: #2a2a2a;
+}
+
+/* liens dans les listes */
+ul li a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   TABLES
+========================================================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: #ffffff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+body.dark-mode table {
+    background: #2a2a2a;
+}
+
+table th,
+table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+body.dark-mode table th,
+body.dark-mode table td {
+    border: 1px solid #444;
+}
+
+table th {
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+body.dark-mode table th {
+    background: #333;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    nav a {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    ul li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}

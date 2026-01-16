@@ -1,0 +1,32 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Liste des Villes{% endblock %}
+
+{% block content %}
+<h1>Villes</h1>
+<a href="{{ path('admin_city_new') }}">Créer une nouvelle ville</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Code postal</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for city in cities %}
+        <tr>
+            <td>{{ city.id }}</td>
+            <td>{{ city.name }}</td>
+            <td>{{ city.postalCode }}</td>
+            <td>
+                <a href="{{ path('admin_city_edit', {'id': city.id}) }}">Edit</a> |
+                <a href="{{ path('admin_city_delete', {'id': city.id}) }}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

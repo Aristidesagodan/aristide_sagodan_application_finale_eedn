@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos{% endblock %}
+
+{% block body %}
+<h2>À propos</h2>
+
+<p>
+    Ce site utilise des cookies uniquement à des fins techniques
+    (cache, performances, préférences utilisateur).
+</p>
+
+<p>
+    Aucune donnée personnelle n’est vendue ou partagée.
+</p>
+
+<h3>🛡️ RGPD et confidentialité</h3>
+<p>
+    Nous respectons la législation européenne sur la protection des données (RGPD). 
+    Vos informations personnelles sont traitées avec soin et utilisées uniquement pour améliorer votre expérience sur Travel Guide.
+</p>
+
+<h3>🎯 Notre mission</h3>
+<p>
+    Travel Guide a pour objectif de vous aider à découvrir les plus belles villes et activités en France, 
+    que ce soit pour un week-end ou des vacances plus longues.
+</p>
+
+<h3>⚡ Fonctionnalités</h3>
+<ul>
+    <li>Recherche rapide par ville</li>
+    <li>Liste des activités et hébergements avec carte interactive</li>
+    <li>Filtres par catégorie et classement</li>
+    <li>Préparation et sauvegarde de vos favoris</li>
+</ul>
+
+<h3>👥 L’équipe</h3>
+<p>
+    Travel Guide est développé par une équipe passionnée de voyages et de technologie. 
+    Nous nous engageons à améliorer continuellement le site pour vous offrir la meilleure expérience possible.
+</p>
+
+<h3>💡 Astuces voyage</h3>
+<ul>
+    <li>Prévoyez vos visites à l’avance pour éviter les files d’attente.</li>
+    <li>Consultez les avis d’autres voyageurs pour choisir les meilleures activités.</li>
+    <li>Utilisez notre carte interactive pour planifier vos itinéraires facilement.</li>
+</ul>
+
+<h3>📬 Nous contacter</h3>
+<p>
+    Pour toute question ou suggestion, vous pouvez nous écrire via notre page <a href="{{ path('contact_index') }}">Contact</a>.
+</p>
+{% endblock %}

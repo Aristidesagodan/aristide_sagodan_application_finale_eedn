@@ -1,17 +1,54 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Travel Guide{% endblock %}</title>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <link rel="stylesheet" href="{{ asset('app.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+</head>
+
+<body class="light">
+
+<header class="site-header">
+    <div class="logo">
+        🌍 <strong>Travel Guide</strong>
+    </div>
+
+    <button id="themeToggle">🌙 / ☀️</button>
+
+    <nav>
+        <a href="{{ path('home') }}">Accueil</a>
+        <a href="{{ path('contact_index') }}">Contact</a>
+
+        {% if app.user %}
+            <span>{{ app.user.email }}</span>
+            <a href="{{ path('logout') }}">Déconnexion</a>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_dashboard') }}">Admin</a>
+            {% endif %}
+        {% else %}
+            <a href="{{ path('login') }}">Connexion</a>
+            <a href="{{ path('register') }}">Inscription</a>
+        {% endif %}
+    </nav>
+</header>
+
+<main>
+    {% block body %}{% endblock %}
+</main>
+
+<footer>
+    <nav class="footer-nav">
+        <a href="{{ path('about') }}">À propos & cookies</a> |
+        <a href="{{ path('contact_index') }}">Contact</a> |
+        <a href="{{ path('faq') }}">FAQ</a>
+    </nav>
+    <p>© {{ "now"|date("Y") }} Travel Guide</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="{{ asset('app.js') }}"></script>
+</body>
 </html>
