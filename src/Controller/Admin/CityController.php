@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\City;
 use App\Form\CityType;
 use App\Repository\CityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,14 +23,13 @@ class CityController extends AbstractController
     }
 
     #[Route('/new', name: 'admin_city_new')]
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $em): Response
     {
         $city = new City();
         $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($city);
             $em->flush();
 
@@ -42,13 +42,13 @@ class CityController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'admin_city_edit')]
-    public function edit(Request $request, City $city): Response
+    public function edit(Request $request, City $city, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(CityType::class, $city);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
             return $this->redirectToRoute('admin_city_index');
         }
 
@@ -59,9 +59,8 @@ class CityController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'admin_city_delete')]
-    public function delete(City $city): Response
+    public function delete(City $city, EntityManagerInterface $em): Response
     {
-        $em = $this->getDoctrine()->getManager();
         $em->remove($city);
         $em->flush();
 
