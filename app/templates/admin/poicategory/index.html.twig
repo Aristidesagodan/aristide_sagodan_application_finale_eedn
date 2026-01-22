@@ -1,0 +1,30 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Liste des Catégories{% endblock %}
+
+{% block content %}
+<h1>Catégories de POI</h1>
+<a href="{{ path('admin_poicategory_new') }}">Créer une nouvelle catégorie</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cat in categories %}
+        <tr>
+            <td>{{ cat.id }}</td>
+            <td>{{ cat.name }}</td>
+            <td>
+                <a href="{{ path('admin_poicategory_edit', {'id': cat.id}) }}">Edit</a> |
+                <a href="{{ path('admin_poicategory_delete', {'id': cat.id}) }}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Éditer Ville{% endblock %}
+
+{% block content %}
+<h1>Éditer Ville: {{ city.name }}</h1>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<button>Enregistrer</button>
+{{ form_end(form) }}
+
+<a href="{{ path('admin_city_index') }}">Retour à la liste</a>
+{% endblock %}

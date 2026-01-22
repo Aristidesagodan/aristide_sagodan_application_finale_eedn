@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<section>
+    <h1>Contactez-nous</h1>
+
+    {# Messages flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    <form action="{{ path('contact_index') }}" method="post">
+        <div>
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit">Envoyer</button>
+    </form>
+</section>
+
+<section>
+    <h2>Notre localisation</h2>
+    <div id="contactMap" style="height: 400px;"></div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // =====================
+    // CARTE LEAFLET
+    // =====================
+    const map = L.map('contactMap').setView([{{ officeLat }}, {{ officeLng }}], 13);
+
+    // OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Marker bureau
+    L.marker([{{ officeLat }}, {{ officeLng }}])
+        .addTo(map)
+        .bindPopup('<strong>Notre bureau</strong>')
+        .openPopup();
+
+    
+});
+</script>
+{% endblock %}

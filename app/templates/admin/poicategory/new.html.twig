@@ -1,0 +1,13 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Créer une Catégorie{% endblock %}
+
+{% block content %}
+<h1>Créer une nouvelle catégorie</h1>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<button>Créer</button>
+{{ form_end(form) }}
+
+<a href="{{ path('admin_poicategory_index') }}">Retour à la liste</a>
+{% endblock %}

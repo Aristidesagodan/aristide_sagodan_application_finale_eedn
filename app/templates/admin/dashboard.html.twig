@@ -1,0 +1,60 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block content %}
+<h1>Dashboard Admin</h1>
+
+{# ----------------------------- #}
+{# Dernières Villes #}
+{# ----------------------------- #}
+<h2>Dernières Villes</h2>
+<ul>
+    {% for city in cities %}
+        <li>
+            {{ city.name }} - 
+            <a href="{{ path('admin_city_edit', {'id': city.id}) }}">Éditer</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{# ----------------------------- #}
+{# Derniers POI #}
+{# ----------------------------- #}
+<h2>Derniers POI</h2>
+<ul>
+    {% for poi in pois %}
+        <li>
+            {{ poi.name }} ({{ poi.city.name }}) - 
+            <a href="{{ path('admin_poi_edit', {'id': poi.id}) }}">Éditer</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{# ----------------------------- #}
+{# Dernières Catégories #}
+{# ----------------------------- #}
+<h2>Dernières Catégories</h2>
+<ul>
+    {% for cat in categories %}
+        <li>
+            {{ cat.name }} - 
+            <a href="{{ path('admin_poicategory_edit', {'id': cat.id}) }}">Éditer</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{# ----------------------------- #}
+{# Derniers Utilisateurs #}
+{# ----------------------------- #}
+<h2>Derniers Utilisateurs</h2>
+<ul>
+    {% for user in users %}
+        {# Remplacer fullName par username ou email selon ton entité User #}
+        <li>
+            {{ user.email }} - 
+            <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Éditer</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

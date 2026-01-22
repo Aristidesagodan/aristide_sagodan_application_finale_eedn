@@ -1,0 +1,23 @@
+# config/services.yaml
+services:
+    # Valeurs par défaut pour tous les services
+    _defaults:
+        autowire: true       # injection automatique des dépendances
+        autoconfigure: true  # applique automatiquement les tags
+        bind:
+            $projectDir: '%kernel.project_dir%'
+
+    # Auto-wire tous les services de App\
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # ⚠️ Spécial pour les controllers : obligatoire pour que Symfony enregistre leurs routes
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+        autowire: true
+        autoconfigure: true

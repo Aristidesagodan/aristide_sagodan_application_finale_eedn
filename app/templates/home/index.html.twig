@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<section>
+    <h2>Rechercher une ville</h2>
+
+    <input type="text" id="cityInput" placeholder="Ex: Paris">
+    <button id="searchBtn">Rechercher</button>
+</section>
+
+<section id="results" style="display:none">
+    <h2 id="cityTitle"></h2>
+
+    <h3>🎯 Activités</h3>
+    <ul id="activities"></ul>
+
+    <h3>🏨 Hébergements</h3>
+    <ul id="accommodations"></ul>
+</section>
+
+<section>
+    <h2>Carte</h2>
+    <div id="map"></div>
+</section>
+{% endblock %}
