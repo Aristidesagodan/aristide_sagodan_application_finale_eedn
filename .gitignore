@@ -1,46 +1,32 @@
-/app/vendor/
+# Symfony
 /app/var/
-.env
-.env.local
-.env.*.local
-/node_modules/
+app/vendor/
+app/node_modules/
+app/.env.local
+app/.env.*.local
+app/.idea/
+app/.vscode/
+app/.history/
+app/.lh/
 
-/*.log
-.idea/
-.vscode/
+# Composer
+app/composer.lock
+
+# PHPUnit
+app/phpunit.xml
+app/phpunit.dist.xml
+
+# Logs
+app/var/log/
+app/var/cache/
+
+# OS files
 .DS_Store
 Thumbs.db
-desktop.ini
-# Ignorer anciens fichiers root
 
+# NPM / Node
+package-lock.json
+yarn.lock
 
-
-
-
-
-translations/
-.env
-.env.*
-
-
-# Symfony app
-/app/vendor/
-/app/var/
-/app/.env
-/app/.env.local
-/app/.env.*.local
-/app/node_modules/
-
-# Anciennes racines que l'on ne veut pas suivre
-
-# OS / IDE
-*.log
-.idea/
-.vscode/
-.DS_Store
-Thumbs.db
-desktop.ini
-.history/
-.lh/
-
-
+# Ignore travel SQL dump if you want, else remove this line
+# travel_guide.sql
