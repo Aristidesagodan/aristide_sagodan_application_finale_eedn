@@ -4,8 +4,7 @@
 .env.local
 .env.*.local
 /node_modules/
-/mongo-data/
-/docker/mongo/data/
+
 /*.log
 .idea/
 .vscode/
@@ -13,19 +12,17 @@
 Thumbs.db
 desktop.ini
 # Ignorer anciens fichiers root
-bin/
-config/
-src/
-public/
-templates/
-tests/
-migrations/
+
+
+
+
+
+
 translations/
 .env
 .env.*
-composer.lock
-package-lock.json
-symfony.lock
+
+
 # Symfony app
 /app/vendor/
 /app/var/
@@ -35,25 +32,6 @@ symfony.lock
 /app/node_modules/
 
 # Anciennes racines que l'on ne veut pas suivre
-bin/
-config/
-src/
-public/
-templates/
-tests/
-migrations/
-translations/
-composer.json
-composer.lock
-package-lock.json
-symfony.lock
-.env
-.env.*
-.phpunit.result.cache
-
-# Docker volumes / Mongo data
-/mongo-data/
-/docker/mongo/data/
 
 # OS / IDE
 *.log
