@@ -1,0 +1,15 @@
+/app/vendor/
+/app/var/
+.env
+.env.local
+.env.*.local
+/node_modules/
+/mongo-data/
+/docker/mongo/data/
+/*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+

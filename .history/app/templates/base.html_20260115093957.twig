@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Travel Guide{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ asset('app.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+</head>
+
+<body class="light">
+
+<header class="site-header">
+    <div class="logo">
+        🌍 <strong>Travel Guide</strong>
+    </div>
+
+    <button id="themeToggle">🌙 / ☀️</button>
+
+    <nav>
+        <a href="{{ path('home') }}">Accueil</a>
+        <a href="{{ path('contact_index') }}">Contact</a>
+
+        {% if app.user %}
+            <span>{{ app.user.email }}</span>
+            <a href="{{ path('logout') }}">Déconnexion</a>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_dashboard') }}">Admin</a>
+            {% endif %}
+        {% else %}
+            <a href="{{ path('login') }}">Connexion</a>
+            <a href="{{ path('register') }}">Inscription</a>
+        {% endif %}
+    </nav>
+</header>
+
+<main>
+    {% block body %}{% endblock %}
+</main>
+
+<footer>
+    <nav class="footer-nav">
+        <a href="{{ path('about') }}">À propos & cookies</a> |
+        <a href="{{ path('contact_index') }}">Contact</a> |
+        <a href="{{ path('faq') }}">FAQ</a>
+    </nav>
+    <p>© {{ "now"|date("Y") }} Travel Guide</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="{{ asset('app.js') }}"></script>
+</body>
+</html>

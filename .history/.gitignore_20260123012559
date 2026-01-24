@@ -1,0 +1,67 @@
+/app/vendor/
+/app/var/
+.env
+.env.local
+.env.*.local
+/node_modules/
+/mongo-data/
+/*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+# Ignorer anciens fichiers root
+bin/
+config/
+src/
+public/
+templates/
+tests/
+migrations/
+translations/
+.env
+.env.*
+composer.lock
+package-lock.json
+symfony.lock
+# Symfony app
+/app/vendor/
+/app/var/
+/app/.env
+/app/.env.local
+/app/.env.*.local
+/app/node_modules/
+
+# Anciennes racines que l'on ne veut pas suivre
+bin/
+config/
+src/
+public/
+templates/
+tests/
+migrations/
+translations/
+composer.json
+composer.lock
+package-lock.json
+symfony.lock
+.env
+.env.*
+.phpunit.result.cache
+
+# Docker volumes / Mongo data
+/mongo-data/
+/docker/mongo/data/
+
+# OS / IDE
+*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+.history/
+.lh/
+
+

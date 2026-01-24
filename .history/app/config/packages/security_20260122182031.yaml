@@ -1,0 +1,36 @@
+security:
+    password_hashers:
+        App\Entity\User: 'auto'
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt))
+            security: false
+
+        main:
+            lazy: true
+            provider: app_user_provider
+
+            form_login:
+                login_path: login
+                check_path: login
+                default_target_path: home
+
+            logout:
+                path: logout
+                target: home
+
+    access_control:
+        # ADMIN
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+        # API sécurisée uniquement pour POST, PUT, DELETE
+        - { path: ^/api/review/add, roles: ROLE_USER }
+        - { path: ^/api/review/.*/update, roles: ROLE_USER }
+        - { path: ^/api/review/.*/delete, roles: ROLE_USER }

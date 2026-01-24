@@ -1,0 +1,50 @@
+# Configuration Doctrine MongoDB ODM
+doctrine_mongodb:
+    # =====================
+    # Connexion à MongoDB
+    # =====================
+    connections:
+        default:
+            server: '%env(MONGODB_URI)%'   # prend l'URI du .env.docker
+            options:
+                authSource: admin           # Auth root
+
+    # =====================
+    # Base par défaut
+    # =====================
+    default_database: '%env(MONGODB_DB)%'
+
+    # =====================
+    # Document Managers
+    # =====================
+    document_managers:
+        default:
+            auto_mapping: true
+            mappings:
+                App:
+                    type: attribute                # On utilise les annotations PHP 8
+                    dir: '%kernel.project_dir%/src/Document'
+                    prefix: 'App\Document'
+                    is_bundle: false
+
+    # Génération automatique pour dev
+    auto_generate_proxy_classes: true
+    auto_generate_hydrator_classes: true
+
+# =====================
+# Production optimisé
+# =====================
+when@prod:
+    doctrine_mongodb:
+        auto_generate_proxy_classes: false
+        auto_generate_hydrator_classes: false
+        document_managers:
+            default:
+                metadata_cache_driver:
+                    type: service
+                    id: doctrine_mongodb.system_cache_pool
+    framework:
+        cache:
+            pools:
+                doctrine_mongodb.system_cache_pool:
+                    adapter: cache.system

@@ -1,0 +1,16 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Éditer POI{% endblock %}
+
+{% block content %}
+<h1>Éditer POI : {{ poi.name }}</h1>
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+{{ form_end(form) }}
+
+<p>
+    <a href="{{ path('admin_poi_index') }}">← Retour à la liste des POI</a>
+</p>
+{% endblock %}

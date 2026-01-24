@@ -45,6 +45,38 @@ header nav a:hover,
 }
 
 /* =========================================================
+   FOOTER – RÉSEAUX SOCIAUX (AJOUT)
+========================================================= */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 10px 0;
+}
+
+.footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-social a svg {
+    width: 26px;
+    height: 26px;
+    fill: #007bff;
+    transition: transform 0.2s ease, fill 0.2s ease;
+}
+
+.footer-social a:hover svg {
+    transform: scale(1.15);
+    fill: #0056b3;
+}
+
+body.dark .footer-social a svg {
+    fill: #2c7be5;
+}
+
+/* =========================================================
    FAQ
 ========================================================= */
 .faq article {
@@ -190,8 +222,8 @@ form button:hover {
 .results ul {
     list-style: none;
     padding-left: 0;
-    display: flex;           /* horizontal par défaut */
-    flex-wrap: wrap;         /* passe à la ligne si trop long */
+    display: flex;           
+    flex-wrap: wrap;         
     gap: 10px;
 }
 
@@ -200,7 +232,7 @@ form button:hover {
     margin-bottom: 4px;
     border-radius: 5px;
     background: #f0f0f0;
-    flex: 1 1 120px;        /* largeur minimale pour les items */
+    flex: 1 1 120px;        
     text-align: center;
 }
 
@@ -212,14 +244,14 @@ body.dark .results li {
    ACTIVITES / HEBERGEMENTS HORIZONTAUX
 ========================================================= */
 .activity-accommodation {
-    display: flex;       /* horizontal */
+    display: flex;       
     gap: 20px;
-    flex-wrap: wrap;      /* passe à la ligne si écran petit */
+    flex-wrap: wrap;      
     margin-bottom: 20px;
 }
 
 .activity-accommodation > div {
-    flex: 1;             /* largeur égale pour activité et hébergement */
+    flex: 1;             
     min-width: 250px;
 }
 
@@ -326,6 +358,10 @@ body.dark footer {
         text-align: center;
     }
 
+    .footer-social {
+        gap: 14px;
+    }
+
     .results {
         gap: 15px;
     }
@@ -335,7 +371,7 @@ body.dark footer {
     }
 
     .activity-accommodation {
-        flex-direction: column; /* vertical sur tablette */
+        flex-direction: column;
     }
 }
 
@@ -366,8 +402,13 @@ body.dark footer {
         gap: 8px;
     }
 
+    .footer-social a svg {
+        width: 22px;
+        height: 22px;
+    }
+
     .activity-accommodation {
-        flex-direction: column; /* vertical sur mobile */
+        flex-direction: column;
     }
 }
 
@@ -385,6 +426,10 @@ body.dark footer {
 
     button {
         width: 100%;
+    }
+
+    .footer-social {
+        gap: 12px;
     }
 
     .about-section {

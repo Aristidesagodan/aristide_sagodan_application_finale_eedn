@@ -1,0 +1,135 @@
+<?php
+
+namespace App\Controller\Api;
+
+use App\Document\Review;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+#[Route('/api/review', name: 'api_review_')]
+#[IsGranted('ROLE_USER')]
+class ReviewController extends AbstractController
+{
+    private DocumentManager $dm;
+
+    public function __construct(DocumentManager $dm)
+    {
+        $this->dm = $dm;
+    }
+
+    // -------------------------------
+    // Ajouter un avis
+    // -------------------------------
+    #[Route('/add', name: 'add', methods: ['POST'])]
+    public function add(Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $poiId = $data['poi_id'] ?? null;
+        $userId = $this->getUser()?->getId();
+        $rating = $data['rating'] ?? null;
+        $comment = $data['comment'] ?? null;
+
+        if (!$poiId || !$userId || $rating === null || !$comment) {
+            return $this->json(['success' => false, 'error' => 'Champs manquants'], 400);
+        }
+
+        $review = new Review();
+        $review->setPoiId((int) $poiId)
+               ->setUserId($userId)
+               ->setRating((float) $rating)
+               ->setComment($comment)
+               ->setCreatedAt(new \DateTime());
+
+        $this->dm->persist($review);
+        $this->dm->flush();
+
+        return $this->json([
+            'success' => true,
+            'id' => (string) $review->getId()
+        ]);
+    }
+
+    // -------------------------------
+    // Lister tous les avis pour un POI
+    // -------------------------------
+    #[Route('/all', name: 'all', methods: ['GET'])]
+    public function all(Request $request): JsonResponse
+    {
+        $poiId = $request->query->get('poi_id');
+        if (!$poiId) {
+            return $this->json([]);
+        }
+
+        $reviews = $this->dm->getRepository(Review::class)
+            ->findBy(['poi_id' => (int) $poiId], ['created_at' => 'DESC']);
+
+        $currentUserId = $this->getUser()?->getId();
+
+        $data = array_map(fn(Review $r) => [
+            'id' => (string) $r->getId(),
+            'poi_id' => $r->getPoiId(),
+            'user_id' => $r->getUserId(),
+            'is_owner' => $currentUserId === $r->getUserId(),
+            'rating' => $r->getRating(),
+            'comment' => $r->getComment(),
+            'created_at' => $r->getCreatedAt()->format('Y-m-d H:i'),
+        ], $reviews);
+
+        return $this->json($data);
+    }
+
+    // -------------------------------
+    // Modifier un avis
+    // -------------------------------
+    #[Route('/{id}/update', name: 'update', methods: ['PUT'])]
+    public function update(string $id, Request $request): JsonResponse
+    {
+        $review = $this->dm->getRepository(Review::class)->find($id);
+        if (!$review) {
+            return $this->json(['success' => false, 'error' => 'Avis introuvable'], 404);
+        }
+
+        if ($review->getUserId() !== $this->getUser()?->getId()) {
+            return $this->json(['success' => false, 'error' => 'Accès refusé'], 403);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        if (isset($data['rating'])) {
+            $review->setRating((float) $data['rating']);
+        }
+        if (isset($data['comment'])) {
+            $review->setComment($data['comment']);
+        }
+
+        $this->dm->flush();
+
+        return $this->json(['success' => true]);
+    }
+
+    // -------------------------------
+    // Supprimer un avis
+    // -------------------------------
+    #[Route('/{id}/delete', name: 'delete', methods: ['DELETE'])]
+    public function delete(string $id): JsonResponse
+    {
+        $review = $this->dm->getRepository(Review::class)->find($id);
+        if (!$review) {
+            return $this->json(['success' => false, 'error' => 'Avis introuvable'], 404);
+        }
+
+        if ($review->getUserId() !== $this->getUser()?->getId()) {
+            return $this->json(['success' => false, 'error' => 'Accès refusé'], 403);
+        }
+
+        $this->dm->remove($review);
+        $this->dm->flush();
+
+        return $this->json(['success' => true]);
+    }
+}

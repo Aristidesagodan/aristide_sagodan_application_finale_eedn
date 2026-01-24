@@ -1,0 +1,394 @@
+/* =========================================================
+   RESET / BASE
+========================================================= */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* =========================================================
+   HEADER / FOOTER
+========================================================= */
+header,
+footer {
+    padding: 10px 20px;
+    background: #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.4rem;
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header nav a,
+.footer-nav a {
+    margin: 0 10px;
+    text-decoration: none; /* supprime le soulignement */
+    color: #007bff;
+}
+
+header nav a:hover,
+.footer-nav a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   FAQ
+========================================================= */
+.faq article {
+    margin-bottom: 20px;
+}
+
+.faq h3 {
+    margin-bottom: 5px;
+    color: #2c7be5;
+}
+
+/* =========================================================
+   LIGHT / DARK MODE
+========================================================= */
+body.dark {
+    background: #121212;
+    color: #eee;
+}
+
+body.dark header,
+body.dark footer {
+    background: #1f1f1f;
+}
+
+.theme-toggle {
+    cursor: pointer;
+    border: none;
+    background: #ddd;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+body.dark .theme-toggle {
+    background: #333;
+    color: #fff;
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+.search-section {
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+body.dark .search-section {
+    background: #1a1a1a;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+body.dark .search-box input {
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+.search-box button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    background: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #0056b3;
+}
+
+/* =========================================================
+   PAGE CONTACT
+========================================================= */
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form input,
+form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+form button {
+    padding: 10px;
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #005fa3;
+}
+
+.flash-success {
+    color: green;
+}
+
+.flash-error {
+    color: red;
+}
+
+#contactMap {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+/* =========================================================
+   RESULTATS
+========================================================= */
+.results {
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.results .list {
+    flex: 1 1 300px;
+}
+
+.results ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;           /* horizontal par défaut */
+    flex-wrap: wrap;         /* passe à la ligne si trop long */
+    gap: 10px;
+}
+
+.results li {
+    padding: 6px 8px;
+    margin-bottom: 4px;
+    border-radius: 5px;
+    background: #f0f0f0;
+    flex: 1 1 120px;        /* largeur minimale pour les items */
+    text-align: center;
+}
+
+body.dark .results li {
+    background: #2a2a2a;
+}
+
+/* =========================================================
+   ACTIVITES / HEBERGEMENTS HORIZONTAUX
+========================================================= */
+.activity-accommodation {
+    display: flex;       /* horizontal */
+    gap: 20px;
+    flex-wrap: wrap;      /* passe à la ligne si écran petit */
+    margin-bottom: 20px;
+}
+
+.activity-accommodation > div {
+    flex: 1;             /* largeur égale pour activité et hébergement */
+    min-width: 250px;
+}
+
+.activity-accommodation h3 {
+    margin-bottom: 10px;
+}
+
+.activity-accommodation ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.activity-accommodation li {
+    padding: 6px 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+body.dark .activity-accommodation li {
+    background: #2a2a2a;
+}
+
+/* =========================================================
+   MAP
+========================================================= */
+.map-section {
+    padding: 20px;
+}
+
+#map {
+    height: 500px;
+    width: 70%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+footer {
+    padding: 15px 20px;
+    background: #eee;
+    text-align: center;
+}
+
+body.dark footer {
+    background: #1f1f1f;
+}
+
+/* =========================================================
+   A PROPOS
+========================================================= */
+.about-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.about-section h2 {
+    color: #2c7be5;
+    margin-bottom: 15px;
+}
+
+.about-section h3 {
+    color: #007bff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.about-section p,
+.about-section ul {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.about-section ul {
+    padding-left: 20px;
+}
+
+.about-section a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.about-section a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   RESPONSIVE – TABLETTE
+========================================================= */
+@media (max-width: 1024px) {
+    header,
+    footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .results {
+        gap: 15px;
+    }
+
+    #map {
+        height: 400px;
+    }
+
+    .activity-accommodation {
+        flex-direction: column; /* vertical sur tablette */
+    }
+}
+
+/* =========================================================
+   RESPONSIVE – MOBILE
+========================================================= */
+@media (max-width: 768px) {
+    .search-box {
+        flex-direction: column;
+    }
+
+    .results {
+        flex-direction: column;
+    }
+
+    form {
+        padding: 0 15px;
+    }
+
+    #map,
+    #contactMap {
+        height: 300px;
+    }
+
+    header nav {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .activity-accommodation {
+        flex-direction: column; /* vertical sur mobile */
+    }
+}
+
+/* =========================================================
+   RESPONSIVE – PETITS MOBILES
+========================================================= */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    .about-section {
+        padding: 15px;
+        margin: 10px;
+    }
+}

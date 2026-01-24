@@ -1,0 +1,50 @@
+{
+    "sourceFile": "app/config/packages/doctrine-mongodb.yaml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1769097870043,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1769101622810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,38 +0,0 @@\n-doctrine_mongodb:\r\n-    auto_generate_proxy_classes: true\r\n-    auto_generate_hydrator_classes: true\r\n-\r\n-    connections:\r\n-        default:\r\n-            # Connexion directe au conteneur Docker MongoDB\r\n-            server: 'mongodb://root:root@symfony_mongodb:27017'\r\n-            options:\r\n-                authSource: admin\r\n-\r\n-    default_database: travel_guide_nosql\r\n-\r\n-    document_managers:\r\n-        default:\r\n-            auto_mapping: true\r\n-            mappings:\r\n-                App:\r\n-                    is_bundle: false\r\n-                    type: attribute\r\n-                    dir: '%kernel.project_dir%/src/Document'\r\n-                    prefix: 'App\\Document'\r\n-\r\n-when@prod:\r\n-    doctrine_mongodb:\r\n-        auto_generate_proxy_classes: false\r\n-        auto_generate_hydrator_classes: false\r\n-        document_managers:\r\n-            default:\r\n-                metadata_cache_driver:\r\n-                    type: service\r\n-                    id: doctrine_mongodb.system_cache_pool\r\n-\r\n-    framework:\r\n-        cache:\r\n-            pools:\r\n-                doctrine_mongodb.system_cache_pool:\r\n-                    adapter: cache.system\r\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1769102592183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1769105847483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1769105999763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1769111834660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1769115034250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1769116167509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1769116876201,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1769097870043,
+            "name": "Commit-0",
+            "content": "doctrine_mongodb:\r\n    auto_generate_proxy_classes: true\r\n    auto_generate_hydrator_classes: true\r\n\r\n    connections:\r\n        default:\r\n            # Connexion directe au conteneur Docker MongoDB\r\n            server: 'mongodb://root:root@symfony_mongodb:27017'\r\n            options:\r\n                authSource: admin\r\n\r\n    default_database: travel_guide_nosql\r\n\r\n    document_managers:\r\n        default:\r\n            auto_mapping: true\r\n            mappings:\r\n                App:\r\n                    is_bundle: false\r\n                    type: attribute\r\n                    dir: '%kernel.project_dir%/src/Document'\r\n                    prefix: 'App\\Document'\r\n\r\nwhen@prod:\r\n    doctrine_mongodb:\r\n        auto_generate_proxy_classes: false\r\n        auto_generate_hydrator_classes: false\r\n        document_managers:\r\n            default:\r\n                metadata_cache_driver:\r\n                    type: service\r\n                    id: doctrine_mongodb.system_cache_pool\r\n\r\n    framework:\r\n        cache:\r\n            pools:\r\n                doctrine_mongodb.system_cache_pool:\r\n                    adapter: cache.system\r\n"
+        }
+    ]
+}
