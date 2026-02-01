@@ -20,6 +20,15 @@ class ContactController extends AbstractController
     {
         // Vérifie si le formulaire est soumis
         if ($request->isMethod('POST')) {
+
+            // ✅ Vérification du token CSRF
+            $submittedToken = $request->request->get('_token');
+
+            if (!$this->isCsrfTokenValid('contact_form', $submittedToken)) {
+                $this->addFlash('error', 'Token CSRF invalide.');
+                return $this->redirectToRoute('contact_index');
+            }
+
             $name = $request->request->get('name');
             $email = $request->request->get('email');
             $messageContent = $request->request->get('message');

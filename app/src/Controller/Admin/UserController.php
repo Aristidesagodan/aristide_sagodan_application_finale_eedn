@@ -29,7 +29,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Ici tu peux encoder le mot de passe si nécessaire
+            // Ici on peut encoder le mot de passe si nécessaire
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();

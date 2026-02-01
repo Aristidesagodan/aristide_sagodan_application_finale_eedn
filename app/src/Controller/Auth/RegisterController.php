@@ -18,6 +18,12 @@ class RegisterController extends AbstractController
         UserPasswordHasherInterface $hasher
     ) {
         if ($request->isMethod('POST')) {
+
+            // ✅ Vérification du token CSRF
+            if (!$this->isCsrfTokenValid('register', $request->request->get('_csrf_token'))) {
+                throw $this->createAccessDeniedException('Token CSRF invalide.');
+            }
+
             $user = new User();
             $user->setEmail($request->request->get('email'));
 

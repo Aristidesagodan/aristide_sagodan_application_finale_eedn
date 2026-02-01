@@ -6,6 +6,7 @@
 <h1>Inscription</h1>
 
 <form method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
     <input type="email" name="email" required placeholder="email">
     <input type="password" name="password" required placeholder="password">
     <button>S'inscrire</button>
