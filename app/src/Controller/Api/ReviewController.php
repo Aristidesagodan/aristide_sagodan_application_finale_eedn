@@ -9,12 +9,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/api/review', name: 'api_review_')]
 #[IsGranted('ROLE_USER')] // Toutes les actions nécessitent un utilisateur connecté
 class ReviewController extends AbstractController
 {
-    public function __construct(private DocumentManager $dm) {}
+    public function __construct(private DocumentManager $dm, private ValidatorInterface $validator) {}
 
     // =====================
     // AJOUTER UN AVIS
@@ -37,8 +38,19 @@ class ReviewController extends AbstractController
         $review->setPoiId((int) $poiId)
                ->setUserId($userId)
                ->setRating((float) $rating)
-               ->setComment($comment)
-               ->setCreatedAt(new \DateTime());
+               ->setComment($comment);
+
+        // =====================
+        // VALIDATION SYMFONY
+        // =====================
+        $errors = $this->validator->validate($review);
+        if (count($errors) > 0) {
+            $errorMessages = [];
+            foreach ($errors as $error) {
+                $errorMessages[$error->getPropertyPath()] = $error->getMessage();
+            }
+            return $this->json(['success' => false, 'errors' => $errorMessages]);
+        }
 
         $this->dm->persist($review);
         $this->dm->flush();
@@ -61,13 +73,13 @@ class ReviewController extends AbstractController
         $reviews = $this->dm->getRepository(Review::class)
             ->findBy(['poi_id' => (int)$poiId], ['created_at' => 'DESC']);
 
-        $currentUserId = $this->getUser()?->getId();
+        $currentUserId = (string) $this->getUser()?->getId();
 
         $data = array_map(fn(Review $r) => [
             'id' => (string) $r->getId(),
             'poi_id' => $r->getPoiId(),
-            'user_id' => $r->getUserId(),
-            'is_owner' => $currentUserId === $r->getUserId(),
+            'user_id' => (string) $r->getUserId(),
+            'is_owner' => $currentUserId === (string) $r->getUserId(),
             'rating' => $r->getRating(),
             'comment' => $r->getComment(),
             'created_at' => $r->getCreatedAt()->format('Y-m-d H:i'),
@@ -87,13 +99,23 @@ class ReviewController extends AbstractController
             return $this->json(['success' => false, 'error' => 'Avis introuvable']);
         }
 
-        if ($review->getUserId() !== $this->getUser()?->getId()) {
+        if ((string)$review->getUserId() !== (string)$this->getUser()?->getId()) {
             return $this->json(['success' => false, 'error' => 'Accès refusé']);
         }
 
         $data = json_decode($request->getContent(), true);
         if (isset($data['rating'])) $review->setRating((float) $data['rating']);
         if (isset($data['comment'])) $review->setComment($data['comment']);
+
+        // Validation avant mise à jour
+        $errors = $this->validator->validate($review);
+        if (count($errors) > 0) {
+            $errorMessages = [];
+            foreach ($errors as $error) {
+                $errorMessages[$error->getPropertyPath()] = $error->getMessage();
+            }
+            return $this->json(['success' => false, 'errors' => $errorMessages]);
+        }
 
         $this->dm->flush();
 
@@ -111,7 +133,7 @@ class ReviewController extends AbstractController
             return $this->json(['success' => false, 'error' => 'Avis introuvable']);
         }
 
-        if ($review->getUserId() !== $this->getUser()?->getId()) {
+        if ((string)$review->getUserId() !== (string)$this->getUser()?->getId()) {
             return $this->json(['success' => false, 'error' => 'Accès refusé']);
         }
 

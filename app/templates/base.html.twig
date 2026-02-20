@@ -1,9 +1,18 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+
+    {# Titre dynamique #}
     <title>{% block title %}Travel Guide{% endblock %}</title>
 
+    {# Description SEO dynamique #}
+    <meta name="description" content="{% block meta_description %}Découvrez les meilleures activités, hébergements et points d'intérêt avec Travel Guide.{% endblock %}">
+
+    {# Responsive & accessibilité #}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {# Styles #}
     <link rel="stylesheet" href="{{ asset('app.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 </head>
@@ -15,10 +24,10 @@
         🌍 <strong>Travel Guide</strong>
     </div>
 
-    <button id="themeToggle">🌙 / ☀️</button>
+    <button id="themeToggle" aria-label="Changer thème">🌙 / ☀️</button>
 
     <nav>
-        <a href="{{ path('home') }}">Accueil</a>
+        <a href="{{ path('app_home') }}">Accueil</a>
         <a href="{{ path('contact_index') }}">Contact</a>
 
         {% if app.user %}
@@ -36,12 +45,16 @@
 </header>
 
 <main>
+    {# H1 dynamique par page / ville #}
+    <h1>{% block main_title %}Travel Guide{% endblock %}</h1>
+
     {% block body %}{% endblock %}
 
+    {# Formulaire d'avis (accessible) #}
     {% if app.user %}
     <div id="reviewFormContainer" style="display:none;">
-        <form id="reviewForm" method="POST" action="#">
-            <h3>Laisser ou modifier un avis</h3>
+        <form id="reviewForm" method="POST" action="#" aria-label="Formulaire de commentaire">
+            <h3>Laisser un avis</h3>
             <input type="hidden" id="reviewPoiId" name="poi_id">
 
             <label for="reviewRating">Note (1-5):</label>
@@ -60,40 +73,56 @@
         <h4>Avis</h4>
         <ul id="reviewsContainer"></ul>
     </div>
+
+    {# Texte SEO sous la carte (indexation POI) #}
+    {% block seo_text %}
+    <p>
+        Explorez les points d'intérêt, activités et hébergements proposés par Travel Guide. 
+        Chaque ville dispose d'une sélection mise à jour pour vous aider à planifier vos voyages.
+    </p>
+    {% endblock %}
 </main>
 
 <footer>
     <nav class="footer-nav">
-        <a href="{{ path('about') }}">À propos & cookies</a> |
+        <a href="{{ path('about') }}">Mentions légales</a> |
         <a href="{{ path('contact_index') }}">Contact</a> |
         <a href="{{ path('faq') }}">FAQ</a>
     </nav>
 
-    <!-- Réseaux sociaux – LOGOS OFFICIELS SVG INLINE -->
     <div class="footer-social">
         <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.5V12H16l-.4 3h-2.3v7A10 10 0 0 0 22 12Z"/>
-            </svg>
+            <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.5V12H16l-.4 3h-2.3v7A10 10 0 0 0 22 12Z"/></svg>
         </a>
 
         <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5Zm5.8-.8a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1Z"/>
-            </svg>
+            <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5Zm5.8-.8a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1Z"/></svg>
         </a>
 
         <a href="https://twitter.com" target="_blank" aria-label="X (Twitter)">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M18.3 2H21l-6.5 7.4L22 22h-6.9l-4.3-5.7L5.7 22H3l7-8L2 2h7l4 5.3L18.3 2Z"/>
-            </svg>
+            <svg viewBox="0 0 24 24"><path d="M18.3 2H21l-6.5 7.4L22 22h-6.9l-4.3-5.7L5.7 22H3l7-8L2 2h7l4 5.3L18.3 2Z"/></svg>
         </a>
     </div>
 
     <p>© {{ "now"|date("Y") }} Travel Guide</p>
 </footer>
 
+<!-- ========================= -->
+<!-- BANDEAU COOKIES RGPD -->
+<!-- ========================= -->
+<div id="cookieBanner" style="display:none; position:fixed; bottom:0; width:100%; background:#222; color:white; padding:15px; z-index:9999; display:flex; justify-content:space-between; align-items:center;">
+    <span>
+        Ce site utilise des cookies techniques nécessaires à son fonctionnement.
+        <a href="{{ path('about') }}" style="color:#4da6ff;">En savoir plus</a>
+    </span>
+    <div>
+        <button id="acceptCookies">Accepter</button>
+        <button id="rejectCookies">Refuser</button>
+    </div>
+</div>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="{{ asset('app.js') }}" defer></script>
+
 </body>
 </html>

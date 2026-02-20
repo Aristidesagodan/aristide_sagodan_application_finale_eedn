@@ -35,7 +35,7 @@ footer {
 header nav a,
 .footer-nav a {
     margin: 0 10px;
-    text-decoration: none; /* supprime le soulignement */
+    text-decoration: none;
     color: #007bff;
 }
 
@@ -45,7 +45,7 @@ header nav a:hover,
 }
 
 /* =========================================================
-   FOOTER – RÉSEAUX SOCIAUX (AJOUT)
+   FOOTER – RÉSEAUX SOCIAUX
 ========================================================= */
 .footer-social {
     display: flex;
@@ -222,8 +222,8 @@ form button:hover {
 .results ul {
     list-style: none;
     padding-left: 0;
-    display: flex;           
-    flex-wrap: wrap;         
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -232,7 +232,7 @@ form button:hover {
     margin-bottom: 4px;
     border-radius: 5px;
     background: #f0f0f0;
-    flex: 1 1 120px;        
+    flex: 1 1 120px;
     text-align: center;
 }
 
@@ -244,14 +244,14 @@ body.dark .results li {
    ACTIVITES / HEBERGEMENTS HORIZONTAUX
 ========================================================= */
 .activity-accommodation {
-    display: flex;       
+    display: flex;
     gap: 20px;
-    flex-wrap: wrap;      
+    flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
 .activity-accommodation > div {
-    flex: 1;             
+    flex: 1;
     min-width: 250px;
 }
 
@@ -306,45 +306,242 @@ body.dark footer {
 }
 
 /* =========================================================
-   A PROPOS
+   MENTIONS LEGALES & RGPD
 ========================================================= */
-.about-section {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+.legal-section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    line-height: 1.7;
 }
 
-.about-section h2 {
+body.dark .legal-section {
+    background: #1f1f1f;
+    box-shadow: none;
+}
+
+.legal-section h2 {
     color: #2c7be5;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2c7be5;
+    padding-bottom: 10px;
 }
 
-.about-section h3 {
-    color: #007bff;
-    margin-top: 20px;
+.legal-section h3 {
+    margin-top: 30px;
     margin-bottom: 10px;
+    color: #007bff;
 }
 
-.about-section p,
-.about-section ul {
+body.dark .legal-section h2,
+body.dark .legal-section h3 {
+    color: #4da3ff;
+}
+
+.legal-section p {
     margin-bottom: 15px;
-    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
-.about-section ul {
+.legal-section ul {
     padding-left: 20px;
+    margin-bottom: 20px;
 }
 
-.about-section a {
+.legal-section li {
+    margin-bottom: 6px;
+}
+
+.legal-section a {
     color: #007bff;
     text-decoration: none;
 }
 
-.about-section a:hover {
+.legal-section a:hover {
     text-decoration: underline;
+}
+
+body.dark .legal-section a {
+    color: #4da3ff;
+}
+
+.legal-section hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+body.dark .legal-section hr {
+    border-top: 1px solid #444;
+}
+
+
+/*COOKIES BANNER*/
+
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #222;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+}
+
+.cookie-banner button {
+    margin-left: 10px;
+}
+
+
+/* =========================================================
+   AVIS / REVIEW
+========================================================= */
+#reviewFormContainer {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #f8f8f8;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+body.dark #reviewFormContainer {
+    background: #1f1f1f;
+    border: 1px solid #444;
+}
+
+#reviewFormContainer h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+#reviewForm input,
+#reviewForm textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+body.dark #reviewForm input,
+body.dark #reviewForm textarea {
+    background: #333;
+    color: #eee;
+    border: 1px solid #555;
+}
+
+#reviewForm button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: background 0.3s;
+}
+
+#reviewForm button:hover {
+    background-color: #0056b3;
+}
+
+#reviewsList {
+    max-width: 600px;
+    margin: 15px auto;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f0f0f0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+body.dark #reviewsList {
+    background: #2a2a2a;
+}
+
+#reviewsContainer {
+    list-style: none;
+    padding-left: 0;
+}
+
+#reviewsContainer li {
+    padding: 6px 8px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.dark #reviewsContainer li {
+    border-bottom: 1px solid #444;
+}
+
+#reviewsContainer li button {
+    padding: 3px 6px;
+    font-size: 0.8rem;
+    margin-left: 5px;
+}
+
+/* ===============================
+   POI CARD
+=================================*/
+.poi-card {
+    background: #ffffff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+}
+
+.poi-card:hover {
+    transform: translateY(-3px);
+}
+
+body.dark .poi-card {
+    background: #1f1f1f;
+}
+
+.poi-card img.poi-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.poi-card h4 {
+    margin-bottom: 10px;
+    color: #2c7be5;
+}
+
+.poi-card p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.poi-actions {
+    margin-top: 10px;
+}
+
+.poi-actions button {
+    padding: 6px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+}
+
+.poi-actions button:hover {
+    background: #0056b3;
 }
 
 /* =========================================================
@@ -372,6 +569,11 @@ body.dark footer {
 
     .activity-accommodation {
         flex-direction: column;
+    }
+
+    #reviewFormContainer,
+    #reviewsList {
+        margin: 15px;
     }
 }
 
@@ -410,6 +612,21 @@ body.dark footer {
     .activity-accommodation {
         flex-direction: column;
     }
+
+    #reviewFormContainer,
+    #reviewsList {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    #reviewsContainer li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #reviewsContainer li button {
+        margin: 5px 0 0 0;
+    }
 }
 
 /* =========================================================
@@ -435,5 +652,43 @@ body.dark footer {
     .about-section {
         padding: 15px;
         margin: 10px;
+    }
+
+    #reviewFormContainer,
+    #reviewsList {
+        margin: 8px;
+        padding: 8px;
+    }
+
+    #reviewFormContainer h3 {
+        font-size: 1rem;
+    }
+
+    #reviewsContainer li {
+        font-size: 0.9rem;
+    }
+
+
+
+    form {
+        margin: 8px;
+        padding: 0 8px;
+        gap: 10px;
+    }
+
+    form input,
+    form textarea {
+        padding: 6px;
+        font-size: 0.9rem;
+    }
+
+    form button {
+        padding: 6px;
+        font-size: 0.9rem;
+    }
+
+    #contactMap {
+        height: 250px;
+        margin: 8px auto;
     }
 }

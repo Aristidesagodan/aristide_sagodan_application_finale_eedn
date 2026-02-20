@@ -13,24 +13,46 @@
         {% endfor %}
     {% endfor %}
 
-    <form action="{{ path('contact_index') }}" method="post">
+    <form action="{{ path('contact_index') }}" method="post" novalidate>
         
         {# 🔐 Protection CSRF #}
         <input type="hidden" name="_token" value="{{ csrf_token('contact_form') }}">
 
         <div>
             <label for="name">Nom</label>
-            <input type="text" id="name" name="name" required>
+            <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required
+                minlength="2"
+                maxlength="100"
+                pattern="[A-Za-zÀ-ÿ\s\-']+"
+                title="Le nom doit contenir uniquement des lettres"
+            >
         </div>
 
         <div>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required
+                maxlength="180"
+            >
         </div>
 
         <div>
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+            <textarea 
+                id="message" 
+                name="message" 
+                rows="5" 
+                required
+                minlength="10"
+                maxlength="1000"
+            ></textarea>
         </div>
 
         <button type="submit">Envoyer</button>
@@ -49,18 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================
     const map = L.map('contactMap').setView([{{ officeLat }}, {{ officeLng }}], 13);
 
-    // OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap'
     }).addTo(map);
 
-    // Marker bureau
     L.marker([{{ officeLat }}, {{ officeLng }}])
         .addTo(map)
         .bindPopup('<strong>Notre bureau</strong>')
         .openPopup();
-
-    
 });
 </script>
 {% endblock %}

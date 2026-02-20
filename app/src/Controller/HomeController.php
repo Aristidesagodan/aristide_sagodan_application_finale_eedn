@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route('/app', name: 'app_home')]
     public function index(): Response
     {
         // Le front consomme l'API /api/cities/{name}/pois

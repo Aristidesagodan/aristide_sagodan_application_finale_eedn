@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PoiRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PoiRepository::class)]
 #[ORM\Table(name: 'poi')]
@@ -19,9 +20,11 @@ class Poi
      * URI unique de Datatourisme
      */
     #[ORM\Column(length: 191, unique: true)]
+    #[Assert\NotBlank(message: "L'ID externe est obligatoire.")]
     private ?string $externalId = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom du lieu est obligatoire.")]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 8, nullable: true)]
@@ -38,10 +41,12 @@ class Poi
 
     #[ORM\ManyToOne(inversedBy: 'pois')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull(message: "La ville est obligatoire.")]
     private ?City $city = null;
 
     #[ORM\ManyToOne(inversedBy: 'pois')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull(message: "La catégorie est obligatoire.")]
     private ?PoiCategory $category = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]

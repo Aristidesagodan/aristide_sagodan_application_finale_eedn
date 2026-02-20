@@ -1,54 +1,125 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}À propos{% endblock %}
+{% block title %}Mentions légales & Politique de confidentialité{% endblock %}
 
 {% block body %}
-<h2>À propos</h2>
 
+<div class="legal-section">
+
+<h2>Mentions légales</h2>
+
+<h3>Éditeur du site</h3>
 <p>
-    Ce site utilise des cookies uniquement à des fins techniques
-    (cache, performances, préférences utilisateur).
+    Nom du projet : <strong>Travel Guide</strong><br>
+    Responsable de publication : <strong>Aristide SAGODAN</strong><br>
+    Email : contact@travel-guide.fr<br>
+    Statut : Projet pédagogique réalisé dans le cadre du titre professionnel 
+    <strong>Développeur Web et Web Mobile</strong>.
 </p>
 
+<h3>Hébergement</h3>
 <p>
-    Aucune donnée personnelle n’est vendue ou partagée.
+    Le site est actuellement hébergé en environnement local à des fins pédagogiques.<br>
+    En cas de mise en production, les informations relatives à l’hébergeur seront mises à jour conformément à la réglementation en vigueur.
 </p>
 
-<h3>🛡️ RGPD et confidentialité</h3>
+<h3>Propriété intellectuelle</h3>
 <p>
-    Nous respectons la législation européenne sur la protection des données (RGPD). 
-    Vos informations personnelles sont traitées avec soin et utilisées uniquement pour améliorer votre expérience sur Travel Guide.
+    L’ensemble des contenus présents sur le site (textes, images, éléments graphiques, logo, code source)
+    est protégé par le droit de la propriété intellectuelle.
+    Toute reproduction, représentation ou diffusion, totale ou partielle,
+    sans autorisation préalable est interdite.
 </p>
 
-<h3>🎯 Notre mission</h3>
-<p>
-    Travel Guide a pour objectif de vous aider à découvrir les plus belles villes et activités en France, 
-    que ce soit pour un week-end ou des vacances plus longues.
-</p>
+<hr>
 
-<h3>⚡ Fonctionnalités</h3>
+<h2>Politique de confidentialité (RGPD)</h2>
+
+<h3>Données collectées</h3>
+<p>
+    Dans le cadre de son fonctionnement, Travel Guide peut collecter les données suivantes :
+</p>
 <ul>
-    <li>Recherche rapide par ville</li>
-    <li>Liste des activités et hébergements avec carte interactive</li>
-    <li>Filtres par catégorie et classement</li>
-    <li>Préparation et sauvegarde de vos favoris</li>
+    <li>Nom</li>
+    <li>Adresse email</li>
+    <li>Avis et commentaires publiés</li>
+    <li>Données techniques (adresse IP, journaux de connexion)</li>
 </ul>
 
-<h3>👥 L’équipe</h3>
+<h3>Finalité du traitement</h3>
 <p>
-    Travel Guide est développé par une équipe passionnée de voyages et de technologie. 
-    Nous nous engageons à améliorer continuellement le site pour vous offrir la meilleure expérience possible.
+    Les données collectées ont pour finalité :
 </p>
-
-<h3>💡 Astuces voyage</h3>
 <ul>
-    <li>Prévoyez vos visites à l’avance pour éviter les files d’attente.</li>
-    <li>Consultez les avis d’autres voyageurs pour choisir les meilleures activités.</li>
-    <li>Utilisez notre carte interactive pour planifier vos itinéraires facilement.</li>
+    <li>La création et la gestion des comptes utilisateurs</li>
+    <li>La publication et modération des avis</li>
+    <li>L’amélioration continue du service</li>
+    <li>La sécurisation de l’application</li>
 </ul>
 
-<h3>📬 Nous contacter</h3>
+<h3>Base légale</h3>
 <p>
-    Pour toute question ou suggestion, vous pouvez nous écrire via notre page <a href="{{ path('contact_index') }}">Contact</a>.
+    Conformément au 
+    Règlement (UE) 2016/679 du Parlement européen et du Conseil du 27 avril 2016 
+    relatif à la protection des données personnelles (RGPD), 
+    le traitement des données repose sur :
 </p>
+<ul>
+    <li>Le consentement explicite de l’utilisateur</li>
+    <li>L’exécution d’un service contractuel (gestion du compte)</li>
+    <li>L’intérêt légitime lié à la sécurité du site</li>
+</ul>
+
+<h3>Durée de conservation</h3>
+<p>
+    Les données personnelles sont conservées pendant toute la durée d’utilisation du compte.
+    Elles peuvent être supprimées à la demande de l’utilisateur via la page de contact.
+</p>
+
+<h3>Sécurité des données</h3>
+<p>
+    Des mesures techniques et organisationnelles sont mises en œuvre afin d’assurer
+    la sécurité des données :
+</p>
+<ul>
+    <li>Hashage sécurisé des mots de passe</li>
+    <li>Protection des formulaires via jeton CSRF</li>
+    <li>Isolation des services via conteneurisation Docker</li>
+    <li>Journalisation des erreurs sans exposition de données sensibles</li>
+</ul>
+
+<h3>Droits des utilisateurs</h3>
+<p>
+    Conformément au RGPD et aux recommandations de la CNIL,
+    vous disposez des droits suivants :
+</p>
+<ul>
+    <li>Droit d’accès à vos données</li>
+    <li>Droit de rectification</li>
+    <li>Droit à l’effacement</li>
+    <li>Droit à la limitation du traitement</li>
+    <li>Droit à la portabilité des données</li>
+</ul>
+
+<p>
+    Pour exercer ces droits, vous pouvez nous contacter via la 
+    <a href="{{ path('contact_index') }}">page Contact</a>.
+</p>
+
+<h3>Cookies</h3>
+<p>
+    Le site utilise uniquement des cookies strictement nécessaires au fonctionnement
+    technique (authentification, gestion de session, préférences utilisateur).
+    Aucun cookie publicitaire ou de suivi commercial n’est utilisé.
+</p>
+
+<hr>
+
+<h3>Dernière mise à jour</h3>
+<p>
+    Document mis à jour le {{ "now"|date("d/m/Y") }}.
+</p>
+
+</div>
+
 {% endblock %}

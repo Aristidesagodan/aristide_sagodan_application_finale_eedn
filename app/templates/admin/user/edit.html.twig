@@ -3,10 +3,32 @@
 {% block title %}Éditer Utilisateur{% endblock %}
 
 {% block content %}
-<h1>Éditer Utilisateur: {{ user.fullName }}</h1>
+<h1>Éditer Utilisateur: {{ user.email }}</h1>
+
 {{ form_start(form) }}
-{{ form_widget(form) }}
-<button>Enregistrer</button>
+
+<div>
+    {{ form_label(form.email) }}
+    {{ form_widget(form.email) }}
+    {{ form_errors(form.email) }}
+</div>
+
+<div>
+    {{ form_label(form.plainPassword) }}
+    {{ form_widget(form.plainPassword) }}
+    {{ form_errors(form.plainPassword) }}
+</div>
+
+<div>
+    {{ form_label(form.roles) }}
+    {{ form_widget(form.roles) }}
+    {{ form_errors(form.roles) }}
+</div>
+
+<div>
+    {{ form_widget(form.save) }}
+</div>
+
 {{ form_end(form) }}
 
 <a href="{{ path('admin_user_index') }}">Retour à la liste</a>

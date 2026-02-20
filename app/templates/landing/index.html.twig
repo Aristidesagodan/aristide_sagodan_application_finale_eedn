@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenue - Travel Guide</title>
+    <link rel="stylesheet" href="{{ asset('app.css') }}">
+    <style>
+        /* ====== LANDING MINIMAL ====== */
+        body.landing {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .landing .hero {
+            height: 100vh;
+            background: url('/images/travel.jpg') center/cover no-repeat !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .landing .overlay {
+            background: rgba(0,0,0,0.6);
+            padding: 60px;
+            text-align: center;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .landing h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .landing p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .landing .buttons a {
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 10px;
+            display: inline-block;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .landing h1 {
+                font-size: 2rem;
+            }
+
+            .landing p {
+                font-size: 1rem;
+            }
+
+            .landing .overlay {
+                padding: 30px;
+            }
+
+            .landing .buttons a {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body class="landing">
+
+<div class="hero">
+    <div class="overlay">
+        <h1>🌍 Travel Guide</h1>
+        <p>Explorez les plus beaux lieux de France</p>
+
+        <div class="buttons">
+            <a href="{{ path('login') }}" class="btn btn-primary">Connexion</a>
+            <a href="{{ path('register') }}" class="btn btn-secondary">Inscription</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

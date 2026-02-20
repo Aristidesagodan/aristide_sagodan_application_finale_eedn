@@ -8,58 +8,100 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[Route('/contact', name: 'contact_index')]
 class ContactController extends AbstractController
 {
-    /**
-     * Affiche le formulaire de contact et envoie l'email si le formulaire est soumis.
-     */
-    #[Route('/', name: '')] // la route finale sera /contact
-    public function index(Request $request, MailerInterface $mailer): Response
+    #[Route('/', name: '')] // URL finale : /contact
+    public function index(
+        Request $request, 
+        MailerInterface $mailer,
+        ValidatorInterface $validator
+    ): Response
     {
-        // Vérifie si le formulaire est soumis
         if ($request->isMethod('POST')) {
 
-            // ✅ Vérification du token CSRF
+            // 🔐 Vérification CSRF
             $submittedToken = $request->request->get('_token');
-
             if (!$this->isCsrfTokenValid('contact_form', $submittedToken)) {
                 $this->addFlash('error', 'Token CSRF invalide.');
                 return $this->redirectToRoute('contact_index');
             }
 
-            $name = $request->request->get('name');
-            $email = $request->request->get('email');
-            $messageContent = $request->request->get('message');
+            $name = trim($request->request->get('name'));
+            $email = trim($request->request->get('email'));
+            $messageContent = trim($request->request->get('message'));
 
-            // Vérifie que tous les champs sont remplis
-            if ($name && $email && $messageContent) {
-                // Création de l'email
-                $emailMessage = (new Email())
-                    ->from($email)
-                    ->to('aristidesagodan@hotmail.fr') // changer avec ton email
-                    ->subject('Message depuis Contact')
-                    ->text("Nom: $name\nEmail: $email\n\n$messageContent");
+            // ✅ Validation avec Symfony Validator
+            $constraints = new Assert\Collection([
+                'name' => [
+                    new Assert\NotBlank(message: "Le nom est obligatoire."),
+                    new Assert\Length(
+                        min: 2,
+                        minMessage:"Le nom doit contenir au moins 2 caractères."
+                    )
+                ],
+                'email' => [
+                    new Assert\NotBlank(message: "L'email est obligatoire."),
+                    new Assert\Email(message: "Adresse email invalide.")
+                ],
+                'message' => [
+                    new Assert\NotBlank(message: "Le message est obligatoire."),
+                    new Assert\Length(
+                        min: 10,
+                        minMessage:"Le message doit contenir au moins 10 caractères."
+                    )
+                ],
+            ]);
 
-                // Envoi de l'email
-                $mailer->send($emailMessage);
+            $input = [
+                'name' => $name,
+                'email' => $email,
+                'message' => $messageContent
+            ];
 
-                $this->addFlash('success', 'Merci ! Votre message a été envoyé.');
+            $violations = $validator->validate($input, $constraints);
+
+            if (count($violations) > 0) {
+                foreach ($violations as $violation) {
+                    $this->addFlash('error', $violation->getMessage());
+                }
+
                 return $this->redirectToRoute('contact_index');
             }
 
-            $this->addFlash('error', 'Veuillez remplir tous les champs.');
+            try {
+                // 📧 Création de l'email
+                $emailMessage = (new Email())
+                    ->from('aristidesagodan48@gmail.com') 
+                    ->replyTo($email)
+                    ->to('aristidesagodan48@gmail.com')
+                    ->subject('Message depuis le formulaire de contact')
+                    ->text(
+                        "Nom : $name\n" .
+                        "Email : $email\n\n" .
+                        $messageContent
+                    );
+
+                // 🚀 Envoi
+                $mailer->send($emailMessage);
+
+                $this->addFlash('success', 'Merci ! Votre message a bien été envoyé.');
+                return $this->redirectToRoute('contact_index');
+
+            } catch (\Throwable $e) {
+                $this->addFlash('error', 'Erreur lors de l’envoi du message.');
+                $this->addFlash('error', $e->getMessage());
+                return $this->redirectToRoute('contact_index');
+            }
         }
 
-        // Coordonnées du marker sur la carte
-        $officeLat = 46.5;
-        $officeLng = 2.5;
-
-        // Rend le template contact/index.html.twig
+        // 📍 Coordonnées de la carte
         return $this->render('contact/index.html.twig', [
-            'officeLat' => $officeLat,
-            'officeLng' => $officeLng,
+            'officeLat' => 46.5,
+            'officeLng' => 2.5,
         ]);
     }
 }

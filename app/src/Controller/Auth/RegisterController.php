@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegisterController extends AbstractController
 {
@@ -15,8 +16,12 @@ class RegisterController extends AbstractController
     public function register(
         Request $request,
         EntityManagerInterface $em,
-        UserPasswordHasherInterface $hasher
+        UserPasswordHasherInterface $hasher,
+        ValidatorInterface $validator
     ) {
+        $errors = [];
+        $old = [];
+
         if ($request->isMethod('POST')) {
 
             // ✅ Vérification du token CSRF
@@ -24,14 +29,40 @@ class RegisterController extends AbstractController
                 throw $this->createAccessDeniedException('Token CSRF invalide.');
             }
 
+            $email = $request->request->get('email');
+            $password = $request->request->get('password');
+            $confirmPassword = $request->request->get('confirm_password');
+
+            $old['email'] = $email;
+
+            // ✅ Vérification confirm password
+            if ($password !== $confirmPassword) {
+                $errors[] = "Les mots de passe ne correspondent pas.";
+            }
+
             $user = new User();
-            $user->setEmail($request->request->get('email'));
+            $user->setEmail($email);
+            $user->setPassword($password); // temporaire pour validation
 
-            $hash = $hasher->hashPassword(
-                $user,
-                $request->request->get('password')
-            );
+            // ✅ Validation Symfony (Email, longueur mot de passe, etc.)
+            $violations = $validator->validate($user);
 
+            if (count($violations) > 0) {
+                foreach ($violations as $violation) {
+                    $errors[] = $violation->getMessage();
+                }
+            }
+
+            // ✅ Si erreurs → on renvoie le formulaire
+            if (!empty($errors)) {
+                return $this->render('auth/register.html.twig', [
+                    'errors' => $errors,
+                    'old' => $old
+                ]);
+            }
+
+            // ✅ Hash seulement si tout est valide
+            $hash = $hasher->hashPassword($user, $password);
             $user->setPassword($hash);
             $user->setRoles(['ROLE_USER']);
 
@@ -41,6 +72,8 @@ class RegisterController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        return $this->render('auth/register.html.twig');
+        return $this->render('auth/register.html.twig', [
+            'errors' => $errors
+        ]);
     }
 }

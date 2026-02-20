@@ -4,9 +4,19 @@
 
 {% block content %}
 <h1>Éditer Catégorie: {{ category.name }}</h1>
+
 {{ form_start(form) }}
-{{ form_widget(form) }}
-<button>Enregistrer</button>
+
+<div>
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+    {{ form_errors(form.name) }}
+</div>
+
+<div>
+    {{ form_widget(form.save) }}
+</div>
+
 {{ form_end(form) }}
 
 <a href="{{ path('admin_poicategory_index') }}">Retour à la liste</a>

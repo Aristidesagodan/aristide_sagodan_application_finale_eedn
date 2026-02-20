@@ -1,0 +1,45 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Gestion des Avis{% endblock %}
+
+{% block content %}
+<h1>Gestion des Avis</h1>
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">{{ message }}</div>
+    {% endfor %}
+{% endfor %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>POI ID</th>
+            <th>Utilisateur ID</th>
+            <th>Note</th>
+            <th>Commentaire</th>
+            <th>Créé le</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for review in reviews %}
+            <tr>
+                <td>{{ review.id }}</td>
+                <td>{{ review.poiId }}</td>
+                <td>{{ review.userId }}</td>
+                <td>{{ review.rating }}</td>
+                <td>{{ review.comment|e }}</td>
+                <td>{{ review.createdAt|date('Y-m-d H:i') }}</td>
+                <td>
+                    <a href="{{ path('admin_review_delete', {'id': review.id}) }}"
+                       onclick="return confirm('Voulez-vous vraiment supprimer cet avis ?')"
+                       class="btn btn-danger btn-sm">Supprimer</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

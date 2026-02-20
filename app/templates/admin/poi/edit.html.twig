@@ -6,8 +6,71 @@
 <h1>Éditer POI : {{ poi.name }}</h1>
 
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+<div>
+    {{ form_label(form.externalId) }}
+    {{ form_widget(form.externalId) }}
+    {{ form_errors(form.externalId) }}
+</div>
+
+<div>
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+    {{ form_errors(form.name) }}
+</div>
+
+<div>
+    {{ form_label(form.latitude) }}
+    {{ form_widget(form.latitude) }}
+    {{ form_errors(form.latitude) }}
+</div>
+
+<div>
+    {{ form_label(form.longitude) }}
+    {{ form_widget(form.longitude) }}
+    {{ form_errors(form.longitude) }}
+</div>
+
+<div>
+    {{ form_label(form.address) }}
+    {{ form_widget(form.address) }}
+    {{ form_errors(form.address) }}
+</div>
+
+<div>
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description) }}
+    {{ form_errors(form.description) }}
+</div>
+
+<div>
+    {{ form_label(form.city) }}
+    {{ form_widget(form.city) }}
+    {{ form_errors(form.city) }}
+</div>
+
+<div>
+    {{ form_label(form.category) }}
+    {{ form_widget(form.category) }}
+    {{ form_errors(form.category) }}
+</div>
+
+<div>
+    {{ form_label(form.contacts) }}
+    {{ form_widget(form.contacts) }}
+    {{ form_errors(form.contacts) }}
+</div>
+
+<div>
+    {{ form_label(form.classements) }}
+    {{ form_widget(form.classements) }}
+    {{ form_errors(form.classements) }}
+</div>
+
+<div>
+    {{ form_widget(form.save) }}
+</div>
+
 {{ form_end(form) }}
 
 <p>

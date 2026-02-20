@@ -5,10 +5,47 @@
 {% block body %}
 <h1>Inscription</h1>
 
-<form method="post">
+{% if errors is defined and errors|length > 0 %}
+    <div class="flash-error">
+        <ul>
+            {% for error in errors %}
+                <li>{{ error.message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<form method="post" novalidate>
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
-    <input type="email" name="email" required placeholder="email">
-    <input type="password" name="password" required placeholder="password">
+
+    <div>
+        <input 
+            type="email" 
+            name="email" 
+            placeholder="Email"
+            value="{{ old.email ?? '' }}"
+            required
+        >
+    </div>
+
+    <div>
+        <input 
+            type="password" 
+            name="password" 
+            placeholder="Mot de passe"
+            required
+        >
+    </div>
+
+    <div>
+        <input 
+            type="password" 
+            name="confirm_password" 
+            placeholder="Confirmer le mot de passe"
+            required
+        >
+    </div>
+
     <button>S'inscrire</button>
 </form>
 {% endblock %}
