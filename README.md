@@ -1,4 +1,4 @@
-# aristide_sagodan_application_finale_eedn
+# aristide_sagodan_travel_guide_dynamique_eedn
 
 🌍 Travel Guide – Symfony 8
 
